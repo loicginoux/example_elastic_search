@@ -1,0 +1,11 @@
+== README
+
+To run the application, you'll need to include a database.yml file in the config directory
+
+I have included a template named database.example.yml
+
+Use it as a guide and change the settings according to your environment and be sure to save the file as database.yml
+
+(If you're using sqlite3, just drop the .example and use as is)
+
+
