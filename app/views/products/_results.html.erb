@@ -1,0 +1,27 @@
+<div class="row">
+<% if @products.empty? %>
+    <p>No products added to database</p>
+<% else %>
+    <div class="row">
+      <div class="small-3 columns">
+        <p>Results count: <%= @products.results.total %> </p>
+      </div>
+    </div>
+<%= paginate @products %>
+    <ul>
+      <% @products.results.each do |product| %>
+          <li>
+            <div class="row">
+              <h4><%= product_name(product) %></h4>
+              <p><%= number_to_currency(product.price) %></p>
+            </div>
+            <div class="row">
+              <div class="small-3 columns"><%= image_tag image_path(product.photo_file_name) %></div>
+              <div class="small-9 columns"><%= product_description(product) %></div>
+            </div>
+          </li>
+          <hr>
+      <% end %>
+    </ul>
+<%= paginate @products %>
+<% end %>

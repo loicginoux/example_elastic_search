@@ -2,9 +2,9 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   # GET /products
-  # GET /products.json
+  # GET /products.js
   def index
-    @products = Product.all
+    @products = Product.search(params)
   end
 
   # GET /products/1
@@ -53,4 +53,4 @@ class ProductsController < ApplicationController
     def product_params
       params.require(:product).permit(:name, :price, :description, :photo)
     end
-end
+  end
