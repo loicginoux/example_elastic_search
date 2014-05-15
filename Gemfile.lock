@@ -32,6 +32,7 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bonsai-elasticsearch-rails (0.0.4)
     builder (3.1.4)
     climate_control (0.0.3)
       activesupport (>= 3.0)
@@ -158,6 +159,7 @@ DEPENDENCIES
   awesome_print
   better_errors
   binding_of_caller
+  bonsai-elasticsearch-rails (~> 0.0.4)
   coffee-rails (~> 4.0.0)
   elasticsearch-model
   elasticsearch-rails

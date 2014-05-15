@@ -37,6 +37,8 @@ gem 'better_errors'
 gem 'awesome_print'
 gem "binding_of_caller"
 
+gem 'bonsai-elasticsearch-rails', '~> 0.0.4'
+
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
