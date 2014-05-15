@@ -1,9 +1,9 @@
 module ProductsHelper
   def product_name(product)
     if product.respond_to?("highlight") && product.highlight.respond_to?("name")
-      link_to product.highlight.name[0].html_safe, product_path(product._id)
+      link_to product.highlight.name[0].html_safe, edit_product_path(product._id)
     else
-      link_to product.name, product_path(product._id)
+      link_to product.name, edit_product_path(product._id)
     end
   end
 

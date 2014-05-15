@@ -1,27 +1,50 @@
 <div class="row">
-<% if @products.empty? %>
-    <p>No products added to database</p>
-<% else %>
+  <div class="small-8 columns">
+    <% if @products.size < 1 && (suggestions = @products.response['suggest']) && suggestions.present?  %>
+      
+        <p class="alert alert-warning">
+          <%= suggestions %>
+          No products have been found. Maybe you mean
+          <%= suggestions.map { |k,v| v.first['options'] }.flatten.map {|v| v['text']}.uniq.map do |term|
+            link_to term, product_path(params.merge search: term)
+          end.to_sentence(last_word_connector: ' or ').html_safe %>?
+        </p>
+    <% else %>
     <div class="row">
       <div class="small-3 columns">
         <p>Results count: <%= @products.results.total %> </p>
       </div>
     </div>
-<%= paginate @products %>
+
     <ul>
       <% @products.results.each do |product| %>
-          <li>
-            <div class="row">
-              <h4><%= product_name(product) %></h4>
-              <p><%= number_to_currency(product.price) %></p>
-            </div>
-            <div class="row">
-              <div class="small-3 columns"><%= image_tag image_path(product.photo_file_name) %></div>
-              <div class="small-9 columns"><%= product_description(product) %></div>
-            </div>
-          </li>
-          <hr>
+      <li>
+        <div class="row">
+          <h4><%= product_name(product) %> - <%= product.brand.name %></h4>
+          <p><span class="label round"><%= product.typed_as %></span> <span class="label secondary"><%= product.brand.country.capitalize %></span></p>
+          <p><%= number_to_currency(product.price) %></p>
+        </div>
+        <div class="row">
+          <div class="small-3 columns"><%= image_tag image_path(product.photo_file_name) %></div>
+          <div class="small-9 columns"><%= product_description(product) %></div>
+        </div>
+      </li>
+      <hr>
       <% end %>
     </ul>
-<%= paginate @products %>
-<% end %>
+    <%= paginate @products %>
+    <% end %>
+  </div>
+  <div class="small-1 columns"></div>
+  <div class="small-3 columns">
+    <div class="sidebar">
+      <h6><%= link_to "All products&rarr;".html_safe, products_path, :class => "" %></h6>
+      <hr>
+      <% unless @products.size < 1 %>
+        <%= render :partial => "search/facet", locals: {title: "Type", param_name: "type", label_method: Proc.new { |*args| args.first.titleize }} %>
+        <%= render :partial => "search/facet", locals: {title: "Brand", param_name: "brand", label_method: Proc.new { |*args| args.first.titleize }} %>
+        <%= render :partial => "search/facet", locals: {title: "Country of origin", param_name: "origin_country", label_method: Proc.new { |*args| COUNTRY_CODES[args.first.upcase.to_sym] } } %>        
+      <% end %>
+    </div>
+  </div>
+</div>

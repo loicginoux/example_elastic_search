@@ -1,0 +1,15 @@
+
+  <h6><%= title %> <%= link_to 'All&rarr;'.html_safe, products_path(params.merge(:"#{param_name.to_sym}" => nil))%></h6>
+  <ul>
+    <% @products.response["facets"][param_name]['terms'].each do |facet| %>
+      <li>
+        <%= link_to label_method.call(facet['term']), products_path(params.merge(:"#{param_name.to_sym}" => facet['term'])), class: "#{' active' if params[param_name.to_sym] == facet['term']}" %>
+        <% if params[:"#{param_name.to_sym}"] == facet['term'].to_s %>
+          (<%= link_to "remove", products_path(params.except(param_name.to_sym)) %>)
+        <% else %>
+          <span class="label secondary right"><%= facet['count'] %></span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+  <hr>
