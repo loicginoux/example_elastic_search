@@ -1,5 +1,6 @@
 == README
 
+demo application hosted on heroku: http://es-example.herokuapp.com/
 INTRO
 =====
 This is a small Ruby on Rails application that integrates elastic search. It's a simple products list page with different search features
