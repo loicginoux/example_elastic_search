@@ -17,8 +17,10 @@ List of features implemented:
 
 SCREENSHOTS
 ===========
+Default view:
 ![Alt text](/public/products_catalog.png?raw=true "screenshot 1")
 
+View after searching for "camera":
 ![Alt text](/public/products_catalog_2.png?raw=true "screenshot 2")
 
 
